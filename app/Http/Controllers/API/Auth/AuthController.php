@@ -18,7 +18,7 @@ class AuthController extends Controller
             "email"=>"required|email",
             "password"=>"required"
         ]);
-        
+
         $user=User::where('email',$request->email)->first();
         if(!$user || !Hash::check($request->password,$user->password)){
             throw ValidationException::withMessages([
@@ -31,5 +31,18 @@ class AuthController extends Controller
             "user"=>$user,
         ]);
         
+    }
+
+    public function register(Request $request){
+        $user=$request->validate([
+            "name"=>"required",
+            "email"=>"required|email",
+            "address"=>"required",
+            "phonenumber"=>"required|min:10, max:10",
+            "date_of_birth"=>"required",
+        ]);
+        $user["password"]=bcrypt($request->password);
+     User::create($user);
+     return response()->json(["message"=>"User registered sucessfully"]);
     }
 }
