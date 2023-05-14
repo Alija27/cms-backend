@@ -6,6 +6,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DepartmentRequest;
+use App\Http\Resources\DepartmentResource;
 
 class DepartmentController extends Controller
 {
@@ -33,8 +34,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        $department->get();
-        return response()->json($department);
+        return response()->json(new DepartmentResource($department));
     }
 
     /**
@@ -47,6 +47,7 @@ class DepartmentController extends Controller
         return response()->json(["message"=>"Department updated sucessfully"]);
     }
 
+    
     /**
      * Remove the specified resource from storage.
      */
