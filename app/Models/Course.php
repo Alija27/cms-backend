@@ -14,4 +14,8 @@ class Course extends Model
         "department_id",
         "fees",
     ];
+
+    public function department(){
+        return $this->belongsTo(Department::class);
+    }
 }
