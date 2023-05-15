@@ -6,6 +6,7 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
+use App\Http\Resources\CourseResource;
 
 class CourseController extends Controller
 {
@@ -34,13 +35,13 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $course->load(["department"]);
-        return response()->json($course);
+        return response()->json(new CourseResource($course));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course)
+    public function update(CourseRequest $request, Course $course)
     {
         $data=$request->validated();
         $course->update($data);
