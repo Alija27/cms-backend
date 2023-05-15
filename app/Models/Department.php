@@ -13,4 +13,8 @@ class Department extends Model
         "name",
     ];
 
+    public function courses(){
+        return $this->belongsToMany(Course::class);
+    }
+
 }
