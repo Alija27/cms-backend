@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Department;
+use App\Utils\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DepartmentRequest;
@@ -10,50 +11,39 @@ use App\Http\Resources\DepartmentResource;
 
 class DepartmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $departments=Department::all();
-        return response()->json($departments);
+        $departments = Department::all();
+        return ApiResponse::success(DepartmentResource::collection($departments));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(DepartmentRequest $request)
     {
-        $department=$request->validated();
+        $department = $request->validated();
         Department::create($department);
-        return response()->json(["message"=>"Department created sucessfully"]);
+        return ApiResponse::success(null, "Department created successfully");
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Department $department)
     {
-        return response()->json(new DepartmentResource($department));
+        return ApiResponse::success(new DepartmentResource($department));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(DepartmentRequest $request, Department $department)
     {
-        $data=$request->validated();
+        $data = $request->validated();
         $department->update($data);
-        return response()->json(["message"=>"Department updated sucessfully"]);
+        return ApiResponse::success(null, "Department updated successfully");
     }
 
-    
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Department $department)
     {
         $department->delete();
-        return response()->json(["message"=>"Department deleted sucessfully"]);
+        return ApiResponse::success(null, "Department deleted successfully");
     }
 }

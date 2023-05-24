@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\Batch;
+use App\Utils\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\BatchRequest;
 use App\Http\Controllers\Controller;
@@ -10,49 +11,38 @@ use App\Http\Resources\BatchResource;
 
 class BatchController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $batches=Batch::all();
-        return response()->json($batches);
+        $batches = Batch::all();
+        return ApiResponse::success($batches);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(BatchRequest $request)
     {
-        $batch=$request->validated();
+        $batch = $request->validated();
         Batch::create($batch);
-        return response()->json(["message"=>"Batch created succesfully"]);
+        return ApiResponse::success(null, "Batch created successfully");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(BatchResource $batch)
+    
+    public function show(Batch $batch)
     {
-        return response()->json($batch);
+        return ApiResponse::success(new BatchResource($batch));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(BatchRequest $request, Batch $batch)
     {
-        $data=$request->validated();
+        $data = $request->validated();
         $batch->update($data);
-        return response()->json(["message"=>"Batch updated successfully"]);
+        return ApiResponse::success(null, "Batch updated successfully");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(Batch $batch)
     {
         $batch->delete();
-        return response()->json(["message"=>"Batch deleted successfully"]);
+        return ApiResponse::success(null, "Batch deleted successfully");
     }
 }

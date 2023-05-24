@@ -7,53 +7,44 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Http\Resources\CourseResource;
+use App\Utils\ApiResponse;
 
 class CourseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $courses=Course::all();
-        return response()->json($courses);
+        $courses = Course::all();
+        return ApiResponse::success(CourseResource::collection($courses));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(CourseRequest $request)
     {
-        $course=$request->validated();
+        $course = $request->validated();
         Course::create($course);
-        return response()->json(["message"=>"Course created sucessfully"]);
+        return APiResponse::success(null, "Course created successfully");
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Course $course)
     {
         $course->load(["department"]);
-        return response()->json(new CourseResource($course));
+        return ApiResponse::success($course);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(CourseRequest $request, Course $course)
     {
-        $data=$request->validated();
+        $data = $request->validated();
         $course->update($data);
-        return response()->json(["message"=>"Course update sucessfully"]);
+        return ApiResponse::success(null, "Course updated successfully");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Course $course)
     {
         $course->delete();
-        return response()->json(["message"=>"Course deleted sucessfully"]);
+        return ApiResponse::success(null,"Course deleted successfully");
     }
 }
