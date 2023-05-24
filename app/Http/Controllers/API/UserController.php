@@ -2,58 +2,52 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Utils\ApiResponse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\StudentResource;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        
+        $users = User::all();
+        return ApiResponse::success($users);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        $user=$request->validate([
-            "name"=>["required"],
-            "email"=>["required"],
-            "password"=>["required"],
-            "address"=>["required"],
-            "phonenumber"=>["required"],
-            "date_of_birth"=>["required"],
+        $user = $request->validate([
+            "name" => ["required"],
+            "email" => ["required"],
+            "address" => ["required"],
+            "phonenumber" => ["required"],
+            "date_of_birth" => ["required"],
         ]);
+        $user["password"] = bcrypt($request->password);
         User::create($user);
-        return response()->json(["message"=>"User created sucessfully"]);
+        return ApiResponse::success($user, "User created successfully");
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(User $user)
     {
-        //
+        return ApiResponse::success($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, User $user)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(User $user)
     {
         //
     }
+
 }
