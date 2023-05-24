@@ -23,9 +23,10 @@ class SubjectRequest extends FormRequest
     {
         return [
             "name"=>["required"],
-            "course_id"=>["required","exists:course,id"],
-            "semester_id"=>["required","exists:semester,id"],
-            "publication"=>["nulable"],
+            "course_id"=>["required","exists:courses,id"],
+            "semester_id"=>["required","exists:semesters,id"],
+            "subject_code"=>["required","unique:subjects,subject_code"],
+            "publication"=>["nullable"],
         ];
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("name");
             $table->foreignId("course_id")->constrained();
             $table->foreignId("semester_id")->constrained();
+            $table->string("subject_code")->unique();
             $table->string("publication")->nullable();
             $table->timestamps();
         });
