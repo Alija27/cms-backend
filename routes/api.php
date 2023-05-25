@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\API\SemesterController;
 use Illuminate\Http\Request;
@@ -45,3 +46,6 @@ Route::resource("subjects", \App\Http\Controllers\API\SubjectController::class);
 
 //Teacher
 Route::resource("teachers", \App\Http\Controllers\API\TeacherController::class);
+
+//Book
+Route::resource("books",\App\Http\Controllers\API\BookController::class);
