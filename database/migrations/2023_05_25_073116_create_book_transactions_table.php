@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('book_transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("book_id");
-            $table->foreignId("student_id");
-            $table->date("borrow_date");
-            $table->date("reurn_date");
+            $table->foreignId("book_id")->constrained();
+            $table->foreignId("user_id")->constrained();
+            $table->datetime("issue_date");
+            $table->datetime("return_date");
             $table->string("status");
             $table->timestamps();
         });

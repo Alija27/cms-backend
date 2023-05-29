@@ -16,7 +16,7 @@ class BookTransactionResource extends JsonResource
     {
         return [
             "book"=>$this->book->name,
-            "student"=>$this->student->name,
+            "user"=>$this->user->name,
             "issue_date"=>$this->issue_date,
             "return_date"=>$this->return_date,
             "status"=>$this->status,

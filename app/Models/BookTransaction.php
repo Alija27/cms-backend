@@ -11,9 +11,17 @@ class BookTransaction extends Model
 
     protected $fillable=[
         "book_id",
-        "student_id",
+        "user_id",
         "issue_date",
         "return_date",
         "status",
     ];
+
+    public function book(){
+        return $this->belongsTo(Book::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

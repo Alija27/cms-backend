@@ -23,9 +23,10 @@ class BookTransactionRequest extends FormRequest
     {
         return [
             "book_id"=>["required"],
-            "student_id"=>["required"],
+            "user_id"=>["required"],
             "issue_date"=>["required"],
             "return_date"=>["required"],
+            "status"=>["required"]
         ];
     }
 }
