@@ -15,10 +15,11 @@ class TeacherResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "user_id"=>$this->user->name,
-            "subject_id"=>$this->subject_id,
-            "semester_id"=>$this->semester_id,
-            "department"=>$this->departments()->pluck('name')->toArray(),
+            "id" => $this->id,
+            "name"=>$this->user->name,
+            "subjects"=>$this->subjects->pluck('name'),
+            "semesters"=>$this->semesters->pluck('name'),
+            "department"=>$this->departments->pluck('name')->toArray(),
         ];
     }
 }

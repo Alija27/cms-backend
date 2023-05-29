@@ -22,6 +22,7 @@ class TeacherController extends Controller
 
     public function store(TeacherRequest $request)
     {
+
         DB::transaction(function () use ($request) {
             $user = $request->validate([
                 "name" => ["required"],
@@ -31,15 +32,19 @@ class TeacherController extends Controller
                 "date_of_birth" => ["required"],
                 "password" => ["required", "min:8"]
             ]);
-            $user["password"] = bcrypt($request->password);
+            $user["password"] = bcrypt($user["password"]);
             $newUser = User::create($user);
             $newUser->assignRole("Teacher");
 
-            $data = $request->validated();
             $teacher = Teacher::create([
                 "user_id" => $newUser->id,
-            ] + $data);
+            ]);
 
+            $semester_subjects = $request->semester_subject;
+
+            foreach ($semester_subjects as $semester => $subject) {
+                $teacher->semesters()->attach($semester, ["subject_id" => $subject]);
+            }
 
             $departments = $request->department_id;
             $teacher->departments()->attach($departments);

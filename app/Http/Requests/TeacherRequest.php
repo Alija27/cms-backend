@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Subject;
+use App\Models\Semester;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TeacherRequest extends FormRequest
@@ -22,10 +24,25 @@ class TeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
-            "semester_id"=>["required","exists:semesters,id"],
-            "subject_id"=>["required","exists:subjects,id"],
+            "semester_subject" => ['required', 'array', function ($attribute, $value, $fail) {
+                //semester
+                $keys  = collect($value)->keys();
+                $semester_ids = Semester::select('id')->get()->pluck('id')->toArray();
+                foreach ($keys as $key) {
+                    if (!in_array($key, $semester_ids)) {
+                        $fail("Semester $key doesn't exist");
+                    }
+                }
+                //subject
+                $values = collect($value)->values();
+                $subject_ids = Subject::select('id')->get()->pluck('id')->toArray();
+                foreach ($values as $value) {
+                    if (!in_array($value, $subject_ids)) {
+                        $fail("Subject $value doesnt exist");
+                    }
+                }
+            }],
+            "department_id" => ["required"],
         ];
-
     }
 }

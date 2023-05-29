@@ -22,12 +22,12 @@ class Teacher extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class, 'semester_subject_teacher');
     }
 
     public function semesters()
     {
-        return $this->belongsToMany(Semester::class);
+        return $this->belongsToMany(Semester::class, 'semester_subject_teacher');
     }
 
     public function departments()
