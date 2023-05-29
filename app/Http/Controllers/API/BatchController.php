@@ -14,7 +14,7 @@ class BatchController extends Controller
     public function index()
     {
         $batches = Batch::all();
-        return ApiResponse::success($batches);
+        return ApiResponse::success(BatchResource::collection($batches));
     }
 
    
