@@ -48,4 +48,7 @@ Route::resource("subjects", \App\Http\Controllers\API\SubjectController::class);
 Route::resource("teachers", \App\Http\Controllers\API\TeacherController::class);
 
 //Book
-Route::resource("books",\App\Http\Controllers\API\BookController::class);
+Route::resource("books", \App\Http\Controllers\API\BookController::class);
+
+//BookTransaction
+Route::resource("book-transactions", \App\Http\Controllers\API\BookTransactionController::class);
