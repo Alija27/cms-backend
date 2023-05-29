@@ -30,7 +30,7 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $course->load(["department"]);
-        return ApiResponse::success($course);
+        return ApiResponse::success(new CourseResource($course));
     }
 
 
@@ -45,6 +45,6 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         $course->delete();
-        return ApiResponse::success(null,"Course deleted successfully");
+        return ApiResponse::success(null, "Course deleted successfully");
     }
 }
