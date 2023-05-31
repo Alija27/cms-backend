@@ -24,4 +24,8 @@ class Course extends Model
     {
         return $this->belongsToMany(Course::class, "book_course");
     }
+
+    public function students(){
+        return $this->belongsToMany(Student::class);
+    }
 }
