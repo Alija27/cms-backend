@@ -22,5 +22,27 @@ class UserSeeder extends Seeder
             "date_of_birth"=>"2059/02/08",
             
         ]);
+
+        User::create([
+            "name"=>"Accountant",
+            "email"=>"account@account.com",
+            "password"=>bcrypt("password"),
+            "address"=>"Gaindakot",
+            "phonenumber"=>"9812919801",
+            "date_of_birth"=>"2059/02/09",
+            
+        ]);
+
+        User::create([
+            "name"=>"Librarian",
+            "email"=>"library@library.com",
+            "password"=>bcrypt("password"),
+            "address"=>"Gaindakot",
+            "phonenumber"=>"9812919815",
+            "date_of_birth"=>"2059/02/10",
+            
+        ]);
+
+        
     }
 }
