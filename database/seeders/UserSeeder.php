@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
@@ -12,37 +14,41 @@ class UserSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
-        User::create([
+    { 
+        $admin= User::create([
             "name"=>"Admin",
             "email"=>"admin@admin.com",
             "password"=>bcrypt("password"),
             "address"=>"Gaindakot",
             "phonenumber"=>"9812919812",
-            "date_of_birth"=>"2059/02/08",
-            
+            "date_of_birth"=>"2059/02/08" 
         ]);
+        $admin->assignRole("admin");
+        
 
-        User::create([
+        $accountant=User::create([
             "name"=>"Accountant",
             "email"=>"account@account.com",
             "password"=>bcrypt("password"),
             "address"=>"Gaindakot",
             "phonenumber"=>"9812919801",
-            "date_of_birth"=>"2059/02/09",
-            
+            "date_of_birth"=>"2059/02/09"
         ]);
+        $accountant->assignRole("accountant");
 
-        User::create([
+        $librarian=User::create([
             "name"=>"Librarian",
             "email"=>"library@library.com",
             "password"=>bcrypt("password"),
             "address"=>"Gaindakot",
             "phonenumber"=>"9812919815",
-            "date_of_birth"=>"2059/02/10",
+            "date_of_birth"=>"2059/02/10"
+            
             
         ]);
+        $librarian->assignRole("librarian");
 
+        
         
     }
 }
