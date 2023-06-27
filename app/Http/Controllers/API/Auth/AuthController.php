@@ -7,7 +7,11 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Utils\ApiResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -19,7 +23,8 @@ class AuthController extends Controller
             "password"=>"required"
         ]);
 
-        $user=User::where('email',$request->email)->first();
+        $user=User::where('email',$request->email)->with("roles")->first();
+        
         if(!$user || !Hash::check($request->password,$user->password)){
             throw ValidationException::withMessages([
                 "email"=>"The provided email is not correct.",
@@ -28,9 +33,13 @@ class AuthController extends Controller
         }
         return response()->json([
             "token"=>$user->createToken(Str::random(10))->plainTextToken,
-            "user"=>$user,
+            "user"=>new UserResource($user),
         ]);
         
+    }
+
+    public function getuser(Request $request){
+       return ApiResponse::success(new UserResource($request->user()->load('roles')));
     }
 
     public function register(Request $request){
