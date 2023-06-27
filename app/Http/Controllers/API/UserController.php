@@ -7,6 +7,7 @@ use App\Utils\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentResource;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return ApiResponse::success($users);
+        return ApiResponse::success(UserResource::collection($users));
     }
 
 
