@@ -18,13 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get("getuser",[\App\Http\Controllers\API\Auth\AuthController::class,"getuser"]);
 });
 
 //Authentication
 Route::post("login", [\App\Http\Controllers\API\Auth\AuthController::class, "login"]);
 Route::post("register", [\App\Http\Controllers\API\Auth\AuthController::class, "register"]);
+
+//Users
+Route::resource("users",\App\Http\Controllers\API\UserController::class);
 
 //Students
 Route::resource("students", \App\Http\Controllers\API\StudentController::class);
