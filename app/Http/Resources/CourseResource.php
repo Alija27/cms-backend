@@ -17,12 +17,14 @@ class CourseResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => ucwords($this->name),
+            "course_name" => ucwords($this->course_name),
             "department" => new DepartmentResource($this->department),
             "fees" => $this->fees,
             "created_at" =>Carbon::parse($this->created_at)->format('l F j,Y'),
             
             
         ];
+
+        
     }
 }

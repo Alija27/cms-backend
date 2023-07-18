@@ -10,7 +10,7 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
+        "course_name",
         "department_id",
         "fees",
     ];
@@ -27,5 +27,10 @@ class Course extends Model
 
     public function students(){
         return $this->belongsToMany(Student::class);
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
     }
 }
