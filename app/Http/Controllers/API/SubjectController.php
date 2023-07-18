@@ -22,14 +22,14 @@ class SubjectController extends Controller
     public function store(SubjectRequest $request)
     {
         $subject = $request->validated();
-        Subject::create($subject);
-        return ApiResponse::success(null, "Subject created successfully");
+        $student=Subject::create($subject);
+        return ApiResponse::success($student, "Subject created successfully");
     }
 
 
     public function show(Subject $subject)
     {
-        return ApiResponse::success($subject);
+        return ApiResponse::success(new SubjectResource($subject));
     }
 
 
@@ -37,13 +37,21 @@ class SubjectController extends Controller
     {
         $data = $request->validated();
         $subject->update($data);
-        return ApiResponse::success(null,"Subject created successfully");
+        return ApiResponse::success(new SubjectResource($subject),"Subject created successfully");
     }
 
 
     public function destroy(Subject $subject)
     {
+        $data = $subject;
         $subject->delete();
-        return ApiResponse::success(null, "Subject deleted successfully");
+        return ApiResponse::success($data, "Subject deleted successfully");
+    }
+
+
+    public function filterSubjectBySemester(Request $request)
+    {
+        $subjects = Subject::where('semester_id', $request->semester_id)->get();
+        return ApiResponse::success(SubjectResource::collection($subjects));
     }
 }

@@ -10,11 +10,21 @@ class Subject extends Model
     use HasFactory;
 
     protected $fillable = [
-        "name",
+        "subject_name",
         "course_id",
         "semester_id",
         "subject_code",
         "publication"
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class);
+    }
     
 }

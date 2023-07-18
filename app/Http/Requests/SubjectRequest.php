@@ -22,10 +22,10 @@ class SubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"=>["required"],
+            "subject_name"=>["required"],
             "course_id"=>["required","exists:courses,id"],
             "semester_id"=>["required","exists:semesters,id"],
-            "subject_code"=>["required","unique:subjects,subject_code"],
+            "subject_code"=>["required"],
             "publication"=>["nullable"],
         ];
     }

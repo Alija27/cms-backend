@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("subject_name");
             $table->foreignId("course_id")->constrained();
             $table->foreignId("semester_id")->constrained();
             $table->string("subject_code")->unique();
