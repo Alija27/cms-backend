@@ -12,18 +12,23 @@ use App\Utils\ApiResponse;
 class CourseController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::all();
-        return ApiResponse::success(CourseResource::collection($courses));
+        $departments = json_decode($request->departments);
+        if(!empty($departments)){   
+            $courses = Course::whereIn("department_id",$departments);
+        }else{
+            $courses = Course::query();
+        }
+        return ApiResponse::success(CourseResource::collection($courses->get()));
     }
 
 
     public function store(CourseRequest $request)
     {
         $course = $request->validated();
-        Course::create($course);
-        return APiResponse::success(null, "Course created successfully");
+        $course = Course::create($course);
+        return APiResponse::success(new CourseResource($course), "Course created successfully");
     }
 
 
@@ -38,13 +43,13 @@ class CourseController extends Controller
     {
         $data = $request->validated();
         $course->update($data);
-        return ApiResponse::success(null, "Course updated successfully");
+        return ApiResponse::success($course, "Course updated successfully");
     }
 
 
     public function destroy(Course $course)
     {
         $course->delete();
-        return ApiResponse::success(null, "Course deleted successfully");
+        return ApiResponse::success($course, "Course deleted successfully");
     }
 }
