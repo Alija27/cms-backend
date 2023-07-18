@@ -21,9 +21,9 @@ class DepartmentController extends Controller
 
     public function store(DepartmentRequest $request)
     {
-        $department = $request->validated();
-        Department::create($department);
-        return ApiResponse::success(null, "Department created successfully");
+        $data = $request->validated();
+        $department = Department::create($data);
+        return ApiResponse::success($department, "Department created successfully");
     }
 
 
@@ -37,13 +37,13 @@ class DepartmentController extends Controller
     {
         $data = $request->validated();
         $department->update($data);
-        return ApiResponse::success(null, "Department updated successfully");
+        return ApiResponse::success($department, "Department updated successfully");
     }
 
 
     public function destroy(Department $department)
     {
         $department->delete();
-        return ApiResponse::success(null, "Department deleted successfully");
+        return ApiResponse::success($department, "Department deleted successfully");
     }
 }
