@@ -48,6 +48,8 @@ class TeacherController extends Controller
 
             $departments = $request->department_id;
             $teacher->departments()->attach($departments);
+            $courses = $request->course_id;
+            $teacher->courses()->attach($courses);
         });
         return ApiResponse::success(null, "Teacher created successfully");
     }
@@ -69,7 +71,8 @@ class TeacherController extends Controller
 
     public function destroy(Teacher $teacher)
     {
+        $teacher->user->delete();
         $teacher->delete();
-        return ApiResponse::success(null, "Teacher deleted successfully");
+        return ApiResponse::success($teacher, "Teacher deleted successfully");
     }
 }
