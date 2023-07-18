@@ -70,6 +70,6 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-        return ApiResponse::success(null, "Student deleted successfully");
+        return ApiResponse::success($student, "Student deleted successfully");
     }
 }
