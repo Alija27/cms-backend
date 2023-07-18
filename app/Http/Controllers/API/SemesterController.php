@@ -21,9 +21,9 @@ class SemesterController extends Controller
     public function store(SemesterRequest $request)
     {
         $semester = $request->validated();
-        Semester::create($semester);
+        $semester=Semester::create($semester);
 
-        return ApiResponse::success(null, "Semester Created successfully");
+        return ApiResponse::success($semester, "Semester Created successfully");
     }
 
     
@@ -32,7 +32,7 @@ class SemesterController extends Controller
         return ApiResponse::success(new SemesterResource($semester));
     }
 
-    public function update(Request $request, Semester $semester)
+    public function update(SemesterRequest $request, Semester $semester)
     {
         $data = $request->validated();
         $semester->update($data);
@@ -43,6 +43,6 @@ class SemesterController extends Controller
     public function destroy(Semester $semester)
     {
         $semester->delete();
-        return ApiResponse::success(null, "Semester deleted successfully");
+        return ApiResponse::success($semester, "Semester deleted successfully");
     }
 }

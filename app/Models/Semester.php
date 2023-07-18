@@ -12,5 +12,14 @@ class Semester extends Model
     protected $fillable=[
         "name",
     ];
-    
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
+    }
 }
