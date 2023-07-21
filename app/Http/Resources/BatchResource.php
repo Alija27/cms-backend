@@ -14,8 +14,8 @@ class BatchResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-                
+        return [   
+           "id"=>$this->id,
             "year"=>$this->year,
         ];
     }

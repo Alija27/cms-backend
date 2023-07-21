@@ -21,8 +21,8 @@ class BatchController extends Controller
     public function store(BatchRequest $request)
     {
         $batch = $request->validated();
-        Batch::create($batch);
-        return ApiResponse::success(null, "Batch created successfully");
+        $batch=Batch::create($batch);
+        return ApiResponse::success($batch, "Batch created successfully");
     }
 
     
@@ -36,13 +36,13 @@ class BatchController extends Controller
     {
         $data = $request->validated();
         $batch->update($data);
-        return ApiResponse::success(null, "Batch updated successfully");
+        return ApiResponse::success($batch, "Batch updated successfully");
     }
 
     
     public function destroy(Batch $batch)
     {
         $batch->delete();
-        return ApiResponse::success(null, "Batch deleted successfully");
+        return ApiResponse::success($batch, "Batch deleted successfully");
     }
 }
