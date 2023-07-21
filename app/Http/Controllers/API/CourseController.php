@@ -14,8 +14,8 @@ class CourseController extends Controller
 
     public function index(Request $request)
     {
-        $departments = json_decode($request->departments);
-        if(!empty($departments)){   
+        $departments = $request->department_id;
+        if(!empty($departments)){
             $courses = Course::whereIn("department_id",$departments);
         }else{
             $courses = Course::query();
@@ -43,7 +43,7 @@ class CourseController extends Controller
     {
         $data = $request->validated();
         $course->update($data);
-        return ApiResponse::success($course, "Course updated successfully");
+        return ApiResponse::success(new CourseResource($course), "Course updated successfully");
     }
 
 
