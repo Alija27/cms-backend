@@ -23,7 +23,7 @@ class SubjectController extends Controller
     {
         $subject = $request->validated();
         $student=Subject::create($subject);
-        return ApiResponse::success($student, "Subject created successfully");
+        return ApiResponse::success(new SubjectResource($student), "Subject created successfully");
     }
 
 
