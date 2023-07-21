@@ -25,7 +25,7 @@ class TeacherController extends Controller
 
         DB::transaction(function () use ($request) {
             $user = $request->validate([
-                "name" => ["required"],
+                "user_name" => ["required"],
                 "email" => ["required"],
                 "address" => ["required"],
                 "phonenumber" => ["required"],
