@@ -12,10 +12,16 @@ use App\Http\Resources\SubjectResource;
 class SubjectController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = Subject::all();
-        return ApiResponse::success(SubjectResource::collection($subjects));
+
+        $courses = $request->course_id;
+        if(!empty($courses)){
+            $subjects = Subject::whereIn("course_id",$courses);
+        }else{
+        $subjects = Subject::query();
+        }
+        return ApiResponse::success(SubjectResource::collection($subjects->get()));
     }
 
 
