@@ -16,10 +16,14 @@ class TeacherResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name"=>$this->user->name,
-            "subjects"=>$this->subjects->pluck('name'),
-            "semesters"=>$this->semesters->pluck('name'),
+            "user_name"=>$this->user->user_name,
+            "email"=>$this->user->email,
+            "address"=>$this->user->address,
+            "phonenumber"=>$this->user->phonenumber,
+            "subject"=>$this->subjects->pluck('subject_name')->toArray(),
+            "course"=>$this->courses->pluck('course_name')->toArray(),
             "department"=>$this->departments->pluck('name')->toArray(),
+            
         ];
     }
 }
