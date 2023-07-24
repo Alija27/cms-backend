@@ -12,7 +12,6 @@ class Teacher extends Model
         "user_id",
         "subject_id",
         "semester_id",
-       
     ];
 
     public function user()
@@ -22,16 +21,16 @@ class Teacher extends Model
 
     public function subjects()
     {
-        return $this->belongsToMany(Subject::class, 'semester_subject_teacher');
-    }
-
-    public function semesters()
-    {
-        return $this->belongsToMany(Semester::class, 'semester_subject_teacher');
+        return $this->belongsToMany(Subject::class, 'subject_teacher');
     }
 
     public function departments()
     {
         return $this->belongsToMany(Department::class, 'department_teacher');
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_teacher');
     }
 }
