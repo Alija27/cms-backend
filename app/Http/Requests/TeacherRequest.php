@@ -24,25 +24,9 @@ class TeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "semester_subject" => ['required', 'array', function ($attribute, $value, $fail) {
-                //semester
-                $keys  = collect($value)->keys();
-                $semester_ids = Semester::select('id')->get()->pluck('id')->toArray();
-                foreach ($keys as $key) {
-                    if (!in_array($key, $semester_ids)) {
-                        $fail("Semester $key doesn't exist");
-                    }
-                }
-                //subject
-                $values = collect($value)->values();
-                $subject_ids = Subject::select('id')->get()->pluck('id')->toArray();
-                foreach ($values as $value) {
-                    if (!in_array($value, $subject_ids)) {
-                        $fail("Subject $value doesnt exist");
-                    }
-                }
-            }],
-            "department_id" => ["required"],
+            "subject_id" => ['required', 'array'],
+            "course_id" => ['required', 'array'],
+            "department_id" => ["required", "array"],
         ];
     }
 }
