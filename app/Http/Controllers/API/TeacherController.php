@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeacherRequest;
 use App\Http\Resources\TeacherResource;
+use App\Models\Subject;
 
 class TeacherController extends Controller
 {
@@ -40,18 +41,16 @@ class TeacherController extends Controller
                 "user_id" => $newUser->id,
             ]);
 
-            $semester_subjects = $request->semester_subject;
-
-            foreach ($semester_subjects as $semester => $subject) {
-                $teacher->semesters()->attach($semester, ["subject_id" => $subject]);
-            }
-
+    
+            $subjects = $request->subject_id;
+            $teacher->subjects()->attach($subjects);
             $departments = $request->department_id;
             $teacher->departments()->attach($departments);
             $courses = $request->course_id;
             $teacher->courses()->attach($courses);
         });
-        return ApiResponse::success(null, "Teacher created successfully");
+        $teacher = Teacher::latest()->first();
+        return ApiResponse::success(new TeacherResource($teacher), "Teacher created successfully");
     }
 
 
@@ -65,7 +64,7 @@ class TeacherController extends Controller
     {
         $data = $request->validate();
         $teacher->update($data);
-        return ApiResponse::success($data, "Teacher updated successfully");
+        return ApiResponse::success(new TeacherResource($data) ,"Teacher updated successfully");
     }
 
 
