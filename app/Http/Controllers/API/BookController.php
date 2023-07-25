@@ -23,11 +23,7 @@ class BookController extends Controller
     {
         $data = $request->validated();
        $book= Book::create($data);
-
-        $course=$request->course_id;
-        $book->courses()->attach($course);
-
-        return ApiResponse::success(null, "Book created successfully");
+        return ApiResponse::success(new BookResource($book), "Book created successfully");
     }
 
 
@@ -41,13 +37,13 @@ class BookController extends Controller
     {
         $data = $request->validated();
         $book->update($data);
-        return ApiResponse::success(null, "Book updated successfully");
+        return ApiResponse::success(new BookResource($book), "Book updated successfully");
     }
 
 
     public function destroy(Book $book)
     {
         $book->delete();
-        return ApiResponse::success(null, "Book deleted successfully");
+        return ApiResponse::success($book, "Book deleted successfully");
     }
 }
