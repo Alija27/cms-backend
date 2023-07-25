@@ -20,9 +20,10 @@ class TeacherResource extends JsonResource
             "email"=>$this->user->email,
             "address"=>$this->user->address,
             "phonenumber"=>$this->user->phonenumber,
-            "subject"=>$this->subjects->pluck('subject_name')->toArray(),
-            "course"=>$this->courses->pluck('course_name')->toArray(),
-            "department"=>$this->departments->pluck('name')->toArray(),
+            "subject"=>$this->subjects,
+            "date_of_birth"=>$this->user->date_of_birth,
+            "course"=>$this->courses,
+            "department"=>$this->departments,
             
         ];
     }
