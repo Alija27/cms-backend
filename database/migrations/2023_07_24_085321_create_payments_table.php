@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("account_id")->constrained("accounts")->onDelete("cascade");
             $table->string("amount");
             $table->string("payment_method");
-            
+            $table->string("payment_date");
             $table->timestamps();
         });
     }
