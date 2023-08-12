@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignId("book_id")->constrained();
             $table->foreignId("user_id")->constrained();
             $table->datetime("issue_date");
-            $table->datetime("return_date");
-            $table->string("status");
+            $table->datetime("return_date")->nullable();
+            $table->string("status")->default("issued");
+            $table->string("book_code");
             $table->timestamps();
         });
     }
