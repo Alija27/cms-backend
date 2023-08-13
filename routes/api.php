@@ -20,11 +20,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get("getuser",[\App\Http\Controllers\API\Auth\AuthController::class,"getuser"]);
+    Route::post("logout", [\App\Http\Controllers\API\Auth\AuthController::class, "logout"]);
 });
 
 //Authentication
 Route::post("login", [\App\Http\Controllers\API\Auth\AuthController::class, "login"]);
 Route::post("register", [\App\Http\Controllers\API\Auth\AuthController::class, "register"]);
+
+
 
 //Users
 Route::resource("users",\App\Http\Controllers\API\UserController::class);
@@ -55,3 +58,4 @@ Route::resource("books", \App\Http\Controllers\API\BookController::class);
 
 //BookTransaction
 Route::resource("book-transactions", \App\Http\Controllers\API\BookTransactionController::class);
+Route::put("booktransactions/status/{bookTransaction}", [\App\Http\Controllers\API\BookTransactionController::class,"updateStatus"]);
