@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Models\User;
+use App\Models\Course;
+use App\Models\Account;
 use App\Models\Student;
 use App\Utils\ApiResponse;
 use Illuminate\Http\Request;
@@ -14,6 +16,7 @@ class StudentController extends Controller
 {
     public function index()
     {
+    
         $students = Student::with("user")->get();
         return ApiResponse::success(StudentResource::collection($students));
     }
@@ -23,7 +26,7 @@ class StudentController extends Controller
     {
         $data = DB::transaction(function () use ($request) {
             $user = $request->validate([
-                "name" => ["required"],
+                "user_name" => ["required"],
                 "email" => ["required", "email"],
                 "address" => ["required"],
                 "phonenumber" => ["required", "min:10", "max:10"],
@@ -34,7 +37,7 @@ class StudentController extends Controller
             $user["password"] = bcrypt($request->password);
 
             $newUser = User::create($user);
-            $newUser->assignRole('Teacher');
+            $newUser->assignRole('Student');
 
             $student = $request->validate([
                 "course_id" => ["required"],
@@ -42,9 +45,22 @@ class StudentController extends Controller
                 "department_id" => ["required"],
             ]);
 
-            return  Student::create([
+            
+            $newStudent=  Student::create([
                 "user_id" => $newUser->id
             ] + $student);
+            
+            $account=Account::create([
+                "user_id" => $newUser->id,
+                "total_fees"=> Course::find($request->course_id)->fees,
+                "paid_fees"=>"0",
+            ]);
+
+            return [
+                "user" => $newUser,
+                "student" => $newStudent,
+                "account" => $account
+            ];
         });
 
         return ApiResponse::success($data, "Student created successfully");
@@ -72,4 +88,6 @@ class StudentController extends Controller
         $student->delete();
         return ApiResponse::success($student, "Student deleted successfully");
     }
+
+    
 }
