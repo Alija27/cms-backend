@@ -24,7 +24,6 @@ class UserSeeder extends Seeder
             "date_of_birth"=>"2059/02/08" 
         ]);
         $admin->assignRole("admin");
-        
 
         $accountant=User::create([
             "user_name"=>"Accountant",
@@ -47,6 +46,17 @@ class UserSeeder extends Seeder
             
         ]);
         $librarian->assignRole("librarian");
+
+        $examiner=User::create([
+            "user_name"=>"   Examiner",
+            "email"=>"exam@exam.com",
+            "password"=>bcrypt("password"),
+            "address"=>"Gaindakot",
+            "phonenumber"=>"9812919815",
+            "date_of_birth"=>"2059/02/10"
+        ]);
+        $examiner->assignRole("examiner");
+        
 
         
         
