@@ -8,6 +8,7 @@ use App\Models\BookTransaction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookTransactionRequest;
 use App\Http\Resources\BookTransactionResource;
+use Illuminate\Support\Carbon;
 
 class BookTransactionController extends Controller
 {
@@ -22,8 +23,8 @@ class BookTransactionController extends Controller
     public function store(BookTransactionRequest $request)
     {
         $transaction = $request->validated();
-        BookTransaction::create($transaction);
-        return ApiResponse::success(null, "BookTransaction created successfully");
+        $transaction = BookTransaction::create($transaction);
+        return ApiResponse::success(new BookTransactionResource($transaction), "BookTransaction created successfully");
     }
 
 
@@ -37,13 +38,38 @@ class BookTransactionController extends Controller
     {
         $data = $request->validated();
         $bookTransaction->update($data);
-        return ApiResponse::success(null, "BookTransation updated succeessfully");
+        return ApiResponse::success(
+            new BookTransactionResource($bookTransaction),
+            "BookTransation updated succeessfully"
+        );
     }
-
 
     public function destroy(BookTransaction $bookTransaction)
     {
         $bookTransaction->delete();
-        return ApiResponse::success(null, "BookTransaction deleted successfully");
+        return ApiResponse::success($bookTransaction, "BookTransaction deleted successfully");
     }
+
+    public function updateStatus(Request $request, BookTransaction $bookTransaction)
+    {
+        $data = $request->validate([
+            "status" => "required|in:issued,returned",
+            "return_date" => "nullable",
+        ]);
+      
+         if($data['status'] == 'returned'){
+                $data['return_date'] = Carbon::now();
+            }
+            else{
+                $data['return_date'] = null;
+            }
+
+        $bookTransaction->update($data);
+        return ApiResponse::success(
+            new BookTransactionResource($bookTransaction),
+            "Status updated succeessfully"
+        );
+    }
+
+    
 }
