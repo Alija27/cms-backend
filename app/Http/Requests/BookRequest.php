@@ -24,7 +24,8 @@ class BookRequest extends FormRequest
         return [
             "name"=>["required"],
             "publication"=>["required"],
-            "quantity"=>["required"]
+            "quantity"=>["required"],
+            "course_id"=>["required", ],
         ];
     }
 }

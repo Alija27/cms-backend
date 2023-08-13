@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\BookTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,6 +20,8 @@ class BookResource extends JsonResource
             "name"=>$this->name,
             "publication"=>$this->publication,
             "quantity"=>$this->quantity,
+            "course"=>$this->courses,
+            "remaining"=> $this->quantity - BookTransaction::where("book_id" , $this->id)->where("status" , "issued")->count(),
         ];
     }
 }

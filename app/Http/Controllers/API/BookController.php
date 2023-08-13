@@ -23,6 +23,7 @@ class BookController extends Controller
     {
         $data = $request->validated();
        $book= Book::create($data);
+       $book->courses()->sync($request->course_id);
         return ApiResponse::success(new BookResource($book), "Book created successfully");
     }
 
