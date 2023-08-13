@@ -19,6 +19,7 @@ class AccountResource extends JsonResource
             "user_id" => $this->user_id,
             "total_fees" => $this->total_fees,
             "paid_fees" => $this->paid_fees,
+            "course_name" => $this->user->student->course->name,
         ];
     }
 }
