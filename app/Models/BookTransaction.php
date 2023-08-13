@@ -15,6 +15,7 @@ class BookTransaction extends Model
         "issue_date",
         "return_date",
         "status",
+        "book_code",
     ];
 
     public function book(){

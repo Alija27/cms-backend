@@ -25,8 +25,9 @@ class BookTransactionRequest extends FormRequest
             "book_id"=>["required"],
             "user_id"=>["required"],
             "issue_date"=>["required"],
-            "return_date"=>["required"],
-            "status"=>["required"]
+            "return_date"=>["nullable"],
+            "status"=>"issued",
+            "book_code"=>["required"],
         ];
     }
 }
