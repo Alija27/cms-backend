@@ -23,7 +23,6 @@ class BookTransactionResource extends JsonResource
             "return_date"=>$this->return_date,
             "status"=>$this->status,
             "book_code"=>$this->book_code,
-            
         ];
     }
 }

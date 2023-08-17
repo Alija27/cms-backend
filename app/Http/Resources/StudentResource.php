@@ -23,7 +23,7 @@ class StudentResource extends JsonResource
             "department"=>new DepartmentResource($this->department),
             "course"=> new  CourseResource($this->course),
             "batch"=>new BatchResource($this->batch),
-            
+        
         ];
     }
 }
