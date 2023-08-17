@@ -12,9 +12,15 @@ use App\Http\Resources\UserResource;
 class UserController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        if(!empty($request->role)){
+            $users = User::whereHas("roles",function($query) use ($request){
+                $query->where("name",$request->role);
+            })->get();
+        } else {
+            $users = User::all();
+        }
         return ApiResponse::success(UserResource::collection($users));
     }
 
@@ -27,6 +33,10 @@ class UserController extends Controller
             "address" => ["required"],
             "phonenumber" => ["required"],
             "date_of_birth" => ["required"],
+            "guardian_name" => ["required"],
+            "guardian_phonenumber" => ["required"],
+            "gender" => ["required"],
+            
         ]);
         $user["password"] = bcrypt($request->password);
         User::create($user);
