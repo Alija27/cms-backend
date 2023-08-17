@@ -11,7 +11,7 @@ class AccountRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,9 +23,9 @@ class AccountRequest extends FormRequest
     {
         return [
             "user_id" => ["required"],
-            "total_fee"=>["required"],
-            "paid_fee"=>["required"],
-            
+            "total_fees"=>["required"],
+            "paid_fees"=>["required"],
+            "course_id"=>["required"],
         ];
     }
 }

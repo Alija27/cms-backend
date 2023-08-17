@@ -17,9 +17,13 @@ class AccountResource extends JsonResource
         return  [
             "id" => $this->id,
             "user_id" => $this->user_id,
+            "user_name" => $this->user->user_name,
+            "guardian_name" => $this->user->guardian_name,
             "total_fees" => $this->total_fees,
-            "paid_fees" => $this->paid_fees,
-            "course_name" => $this->user->student->course->name,
+            "paid_fees" => $paidFees = $this->payments->sum("amount") ?? 0,
+            "course_id" => $this->course_id,
+            "course_name" => $this->course->course_name,
+            "remaining_fees" => $this->total_fees - $paidFees,
         ];
     }
 }

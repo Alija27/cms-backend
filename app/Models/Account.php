@@ -12,5 +12,18 @@ class Account extends Model
         "user_id",
         "total_fees",
         "paid_fees",
+        "course_id",
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
+
+    public function payments(){
+        return $this->hasMany(Payment::class);
+    }
 }
