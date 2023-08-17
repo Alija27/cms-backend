@@ -59,3 +59,9 @@ Route::resource("books", \App\Http\Controllers\API\BookController::class);
 //BookTransaction
 Route::resource("book-transactions", \App\Http\Controllers\API\BookTransactionController::class);
 Route::put("booktransactions/status/{bookTransaction}", [\App\Http\Controllers\API\BookTransactionController::class,"updateStatus"]);
+
+//Account
+Route::resource("accounts", \App\Http\Controllers\API\AccountController::class);
+
+//Payment   
+Route::resource("payments", \App\Http\Controllers\API\PaymentController::class);
