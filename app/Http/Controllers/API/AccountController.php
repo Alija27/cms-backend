@@ -12,10 +12,15 @@ use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
-     public function index()
+     public function index(Request $request)
     {
-        $accounts = Account::all();
-        return ApiResponse::success(AccountResource::collection($accounts));
+        if(!empty($request->user_id)){
+            $accounts=Account::where("user_id",$request->user_id);
+        }
+        else{
+        $accounts = Account::query();
+        }
+        return ApiResponse::success(AccountResource::collection($accounts->get()));
     }
 
     public function store(AccountRequest $request)
@@ -42,7 +47,5 @@ class AccountController extends Controller
         $account->delete();
         return ApiResponse::success($account, "Account deleted successfully");
     }
-
-    
 
 }
