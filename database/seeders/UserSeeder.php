@@ -21,7 +21,10 @@ class UserSeeder extends Seeder
             "password"=>bcrypt("password"),
             "address"=>"Gaindakot",
             "phonenumber"=>"9812919812",
-            "date_of_birth"=>"2059/02/08" 
+            "date_of_birth"=>"2059/02/08",
+            "guardian_name"=>"Ram",
+            "guardian_phonenumber"=>"1234513456",
+            "gender"=>"male"
         ]);
         $admin->assignRole("admin");
 
@@ -31,7 +34,10 @@ class UserSeeder extends Seeder
             "password"=>bcrypt("password"),
             "address"=>"Gaindakot",
             "phonenumber"=>"9812919801",
-            "date_of_birth"=>"2059/02/09"
+            "date_of_birth"=>"2059/02/09",
+            "guardian_name"=>"Hari",
+            "guardian_phonenumber"=>"1234567123",
+            "gender"=>"male",
         ]);
         $accountant->assignRole("accountant");
 
@@ -41,7 +47,10 @@ class UserSeeder extends Seeder
             "password"=>bcrypt("password"),
             "address"=>"Gaindakot",
             "phonenumber"=>"9812919815",
-            "date_of_birth"=>"2059/02/10"
+            "date_of_birth"=>"2059/02/10",
+            "guardian_name"=>"Shyam",
+            "guardian_phonenumber"=>"9812919812",
+            "gender"=>"male"
             
             
         ]);
@@ -53,7 +62,10 @@ class UserSeeder extends Seeder
             "password"=>bcrypt("password"),
             "address"=>"Gaindakot",
             "phonenumber"=>"9812919815",
-            "date_of_birth"=>"2059/02/10"
+            "date_of_birth"=>"2059/02/10",
+            "guardian_name"=>"Shyam",
+            "guardian_phonenumber"=>"981298281",
+            "gender"=>"male",
         ]);
         $examiner->assignRole("examiner");
         
