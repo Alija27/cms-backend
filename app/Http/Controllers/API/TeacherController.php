@@ -31,7 +31,10 @@ class TeacherController extends Controller
                 "address" => ["required"],
                 "phonenumber" => ["required"],
                 "date_of_birth" => ["required"],
-                "password" => ["required", "min:8"]
+                "password" => ["required", "min:8"],
+                "guardian_name" => ["required"],
+                "guardian_phonenumber"=>["required"],
+                "gender" => ["required"],
             ]);
             $user["password"] = bcrypt($user["password"]);
             $newUser = User::create($user);
