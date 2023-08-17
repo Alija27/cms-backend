@@ -31,7 +31,10 @@ class StudentController extends Controller
                 "address" => ["required"],
                 "phonenumber" => ["required", "min:10", "max:10"],
                 "date_of_birth" => ["required"],
-                "password" => ["required", "min:8"]
+                "password" => ["required", "min:8"],
+                "guardian_name" => ["required"],
+                "guardian_phonenumber"=>["required"],
+                "gender" => ["required"],
             ]);
 
             $user["password"] = bcrypt($request->password);
@@ -54,6 +57,7 @@ class StudentController extends Controller
                 "user_id" => $newUser->id,
                 "total_fees"=> Course::find($request->course_id)->fees,
                 "paid_fees"=>"0",
+                "course_id"=>$request->course_id,
             ]);
 
             return [
