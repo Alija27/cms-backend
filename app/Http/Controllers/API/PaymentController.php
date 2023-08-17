@@ -14,7 +14,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payments = Payment::all();
+        $payments = Payment::with('user',  'account')->get();
         return ApiResponse::success(PaymentResource::collection($payments));
     }
 

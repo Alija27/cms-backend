@@ -16,8 +16,8 @@ class PaymentResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "user_id" => $this->user_id,
-            "account_id" => $this->account_id,
+            "user"=> new UserResource($this->user),
+            "account" => new AccountResource($this->account),
             "amount" => $this->amount,
             "payment_method" => $this->payment_method,
             "payment_date" => $this->payment_date,
