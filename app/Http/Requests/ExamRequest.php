@@ -11,7 +11,7 @@ class ExamRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,14 +22,20 @@ class ExamRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id" => $this->id,
-            "subject_id" => $this->subject_id,
-            "course_id" => $this->course_id,
-            "semester_id" => $this->semester_id,
-            "teacher_id" => $this->teacher_id,
-            "date" => $this->date,
-            "time" => $this->time,
+            "date" => ["required", "date"],
+            "time" => ["required"],
+            "duration" => ["required"],
+            "exam_type" => ["required"],
+            "course_id" => ["required"],
+            "teacher_id" => ["required"],
+            "semester_id" => ["required"],
+            "subject_id" => ["required"],
+            "total_marks" => ["required"],
+            "pass_marks" => ["required"],
+            "description" => ["required"],
+            "is_active" => "true",
 
-        ];
+            
+];
     }
 }
