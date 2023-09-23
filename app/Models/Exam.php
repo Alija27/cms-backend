@@ -19,6 +19,28 @@ class Exam extends Model
         "total_marks",
         "pass_marks",
         "exam_type",
+        "description",
+        
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+    
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }
 

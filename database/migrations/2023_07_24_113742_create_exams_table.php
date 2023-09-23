@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string("pass_marks");
             $table->text("description");
             $table->string("exam_type");
+            $table->boolean("is_active")->default(true);
             $table->timestamps();
         });
     }
