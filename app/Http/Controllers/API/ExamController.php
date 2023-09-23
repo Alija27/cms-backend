@@ -13,8 +13,12 @@ class ExamController extends Controller
 {
     public function index(Request $request)
     {
-        $exams = $request->user()->exams()->with(["course", "department"]);
-        return ApiResponse::success(ExamResource::collection($exams->get()));
+        if(!empty($request->course_id && $request->semester_id)){
+            $exams = Exam::where('course_id', $request->course_id)->where('semester_id', $request->semester_id)->where("is_active","true")->get();     
+        }else{
+        $exams = Exam::where("is_active","1")->get();
+        }
+        return ApiResponse::success(ExamResource::collection($exams));
     }
 
     public function store(ExamRequest $request)
@@ -26,7 +30,7 @@ class ExamController extends Controller
 
     public function show(Exam $exam)
     {
-        $exam->load(["course", "department"]);
+        
         return ApiResponse::success(new ExamResource($exam));
     }
 
