@@ -11,7 +11,7 @@ class ResultRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,9 @@ class ResultRequest extends FormRequest
             "exam_id" => ["required", "exists:exams,id"],
             "student_id" => ["required", "exists:students,id"],
             "marks" => ["required", "string"],
-            "type" => ["required", "string"],
+            "status" => ["required", "string"],
+            "semester_id" => ["required", "exists:semesters,id"],
+            "course_id" => ["required", "exists:courses,id"],
         ];
     }
 }
