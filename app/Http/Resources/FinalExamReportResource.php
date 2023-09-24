@@ -16,8 +16,8 @@ class FinalExamReportResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "student_id" => $this->student_id,
-            "student_name" => $this->student->name,
+            "student_id" => $this->student_id, 
+            "student_name" => $this->student->user->user_name,
             "course_id" => $this->course_id,
             "course_name" => $this->course->name,
             "semester_id" => $this->semester_id,

@@ -9,10 +9,16 @@ class FinalExamReport extends Model
 {
     use HasFactory;
 
+    protected $table = 'finalexamreport';
+
     protected $fillable = [
-        "exam_id",
+        "course_id",
+        "semester_id",
         "student_id",
-        "marks",
-        "type",
+        "batch_id",
+        "date",
+        "position",
+        "grade",
+        "gpa",
     ];
 }

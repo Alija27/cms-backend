@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('finalexamreport', function (Blueprint $table) {
-            $table->id();
+            $table->id(); 
             $table->foreignId("course_id")->constrained("courses")->onDelete("cascade");
             $table->foreignId("semester_id")->constrained("semesters")->onDelete("cascade");
             $table->foreignId("student_id")->constrained("students")->onDelete("cascade");
