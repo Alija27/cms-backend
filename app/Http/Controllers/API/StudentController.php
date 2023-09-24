@@ -14,10 +14,14 @@ use App\Http\Resources\StudentResource;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-    
+        if(!empty($request->course_id)){
+            $students = Student::where('course_id', $request->course_id)->get();
+        }else{
         $students = Student::with("user")->get();
+        }
+
         return ApiResponse::success(StudentResource::collection($students));
     }
 
