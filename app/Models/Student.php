@@ -31,4 +31,9 @@ class Student extends Model
     public function batch(){
         return $this->belongsTo(Batch::class);
     }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 }
