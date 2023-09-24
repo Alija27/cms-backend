@@ -13,6 +13,18 @@ class Result extends Model
             "exam_id",
             "student_id",
             "marks",
-            "type",
+            "status",
+            "semester_id",
+            "course_id",
         ];
+
+        public function exam()
+        {
+            return $this->belongsTo(Exam::class);
+        }
+
+        public function student()
+        {
+            return $this->belongsTo(Student::class);
+        }
 }

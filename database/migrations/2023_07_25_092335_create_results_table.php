@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("course_id")->constrained("courses");
+            $table->foreignId("semester_id")->constrained("semesters");
             $table->foreignId("exam_id")->constrained("exams");
             $table->foreignId("student_id")->constrained("students");
             $table->string("marks");
-            $table->string("type");
+            $table->string("status");
             $table->timestamps();
         });
     }

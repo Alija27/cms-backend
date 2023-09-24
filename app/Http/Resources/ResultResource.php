@@ -16,10 +16,10 @@ class ResultResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "exam_id" => $this->exam_id,
-            "student_id" => $this->student_id,
+            "exam" => new ExamResource($this->exam),
+            "student" => new StudentResource($this->student),
             "marks" => $this->marks,
-            "type" => $this->type,
+            "status" => $this->status,
             "created_at" => $this->created_at,
             "updated_at" => $this->updated_at,
         ];

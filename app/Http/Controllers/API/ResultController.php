@@ -13,8 +13,8 @@ class ResultController extends Controller
 {
     public    function index(Request $request)
     {
-        $results = $request->user()->results()->with(["exam", "student"]);
-        return ApiResponse::success(ResultResource::collection($results->get()));
+        $results = Result::all();
+        return ApiResponse::success(ResultResource::collection($results));
     }
 
     public function store(ResultRequest $request)

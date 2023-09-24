@@ -12,4 +12,14 @@ class Batch extends Model
     protected $fillable=[
         "year",
     ];
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
+
+    public static function current_batch()
+    {
+        return Batch::where("year", date("Y"))->first();
+    }
 }
