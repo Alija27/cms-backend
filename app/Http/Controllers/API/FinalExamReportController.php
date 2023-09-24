@@ -2,24 +2,34 @@
 
 namespace App\Http\Controllers\API;
 
+use Carbon\Carbon;
 use App\Utils\ApiResponse;
+use Spatie\FlareClient\Api;
 use Illuminate\Http\Request;
 use App\Models\FinalExamReport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FinalExamReportRequest;
 use App\Http\Resources\FinalExamReportResource;
-use Spatie\FlareClient\Api;
 
 class FinalExamReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data=FinalExamReport::query();
+        if($request->course_id){
+            $data=$data->where("course_id",$request->course_id);
+        }
+        if($request->semester_id){
+            $data=$data->where("semester_id",$request->semester_id);
+        }
+        if($request->batch_id){
+            $data=$data->where("batch_id",$request->batch_id);
+        }
 
-        $data=FinalExamReport::all();
-        return ApiResponse::success(FinalExamReportResource::collection($data));
+        return ApiResponse::success(FinalExamReportResource::collection($data->get()));
     }
 
     /**
@@ -29,6 +39,7 @@ class FinalExamReportController extends Controller
     {
 
         $data=$request->validated();
+        $data["date"]=Carbon::now();
         $data=FinalExamReport::create($data);
         return ApiResponse::success(new FinalExamReportResource($data), "FinalExamReport created successfully");
     }

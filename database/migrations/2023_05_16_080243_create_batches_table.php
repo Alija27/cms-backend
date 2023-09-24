@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
-            $table->string("year");
+            $table->string("year")->unique();
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ class StudentController extends Controller
 {
     public function index(Request $request)
     {
+        
         if(!empty($request->course_id)){
             $students = Student::where('course_id', $request->course_id)->get();
         }else{

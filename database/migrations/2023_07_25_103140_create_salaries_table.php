@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("incentive_amount")->nullable();
             $table->string("deduction_title")->nullable();
             $table->string("deduction_amount")->nullable();
+            $table->string("payment_date");
             $table->string("net_pay");
             $table->timestamps();
         });

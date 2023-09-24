@@ -16,8 +16,7 @@ class SalaryResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "user_id" => $this->user_id,
-            "user_name" => $this->user->name,
+            "user" => new UserResource($this->user),
             "role" => $this->user->role,
             "month" => $this->month,
             "year" => $this->year,
@@ -28,6 +27,7 @@ class SalaryResource extends JsonResource
             "deduction_title" => $this->deduction_title,
             "deduction_amount" => $this->deduction_amount,
             "net_pay" => $this->net_pay,
+            "payment_date" => $this->payment_date,
 
         ];
     }

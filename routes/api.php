@@ -66,5 +66,35 @@ Route::resource("accounts", \App\Http\Controllers\API\AccountController::class);
 //Payment
 Route::resource("payments", \App\Http\Controllers\API\PaymentController::class);
 
-//Exam
+//Exam 
 Route::resource("exams", \App\Http\Controllers\API\ExamController::class);
+ 
+
+
+
+//Result
+Route::resource("results", \App\Http\Controllers\API\ResultController::class);
+
+
+
+
+//FinalExamReport
+Route::resource("final-exam-reports", \App\Http\Controllers\API\FinalExamReportController::class);
+
+
+//Salaries
+Route::resource("salaries", \App\Http\Controllers\API\SalaryController::class);
+
+
+
+
+
+
+//batches_students
+Route::get("batch-students", [\App\Http\Controllers\API\SiteController::class, "batches_students"]);
+//courses_students
+Route::get("course-students", [\App\Http\Controllers\API\SiteController::class, "courses_students"]);
+//courses_students_last_five_years
+Route::get("course-students-last-five-years", [\App\Http\Controllers\API\SiteController::class, "courses_students_last_five_years"]);
+//roles_users
+Route::get("roles-users", [\App\Http\Controllers\API\SiteController::class, "roles_users"]);

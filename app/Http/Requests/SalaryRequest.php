@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SalaryRequest extends FormRequest
@@ -32,6 +33,7 @@ class SalaryRequest extends FormRequest
             "deduction_title"=>["required"],
             "deduction_amount"=>["required"],
             "net_pay"=>["required"],
+            
         ];
     }
 }

@@ -14,7 +14,7 @@ class ExamController extends Controller
     public function index(Request $request)
     {
         if(!empty($request->course_id) && !empty($request->semester_id)){
-            $exams = Exam::where('course_id', $request->course_id)->where('semester_id', $request->semester_id)->where("is_active","1")->get();     
+            $exams = Exam::where('course_id', $request->course_id)->where('semester_id', $request->semester_id)->where("is_active","1")->get();
         }else{
         $exams = Exam::where("is_active","1")->get();
         }
@@ -46,4 +46,6 @@ class ExamController extends Controller
         $exam->delete();
         return ApiResponse::success($exam, "Exam deleted successfully");
     }
+
+   
 }

@@ -18,7 +18,12 @@ class Salary extends Model
             "incentive_amount",
             "deduction_amount",
             "deduction_title",
-            "nert_pay",
+            "net_pay",
             "payment_date",
         ];
+
+        public function user()
+        {
+            return $this->belongsTo(User::class);
+        }
 }

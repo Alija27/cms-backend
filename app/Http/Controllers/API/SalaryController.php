@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Carbon\Carbon;
 use App\Models\Salary;
 use App\Utils\ApiResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class SalaryController extends Controller
     public function index()
     {
         $salaries=Salary::all();
-        return response()->json(new SalaryResource($salaries));
+        return ApiResponse::success(SalaryResource::collection($salaries));
         }
 
     /**
@@ -25,6 +26,7 @@ class SalaryController extends Controller
     public function store(Request $request)
     {
         $data=$request->all();
+        $data["payment_date"] =Carbon::now();
         $data=Salary::create($data);
         return ApiResponse::success(new SalaryResource($data), "Salary created successfully");
     }
