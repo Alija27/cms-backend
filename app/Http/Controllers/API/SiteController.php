@@ -18,6 +18,7 @@ class SiteController extends Controller
             "subjects" => \App\Models\Subject::count(),
             "semesters" => \App\Models\Semester::count(),
             "books" => \App\Models\Book::count(),
+            "departments" => \App\Models\Department::count(),
         ];
         return response()->json($data);
     }
@@ -84,6 +85,20 @@ class SiteController extends Controller
             $data[] = [
                 "role" => $role->name,
                 "users" => $role->users->count(),
+            ];
+        }
+        return response()->json($data);
+    }
+
+    //NUmber of book in Each course
+    public function courses_books()
+    {
+        $data = [];
+        $courses = \App\Models\Course::all();
+        foreach ($courses as $course) {
+            $data[] = [
+                "course" => $course->course_name,
+                "books" => $course->books->count(),
             ];
         }
         return response()->json($data);

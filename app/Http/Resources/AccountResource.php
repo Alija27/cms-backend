@@ -20,7 +20,7 @@ class AccountResource extends JsonResource
             "user_name" => $this->user->user_name,
             "guardian_name" => $this->user->guardian_name,
             "total_fees" => $this->total_fees,
-            "paid_fees" => $paidFees = $this->payments->sum("amount") ?? 0,
+            "paid_fees" => $paidFees = $this->paid_fees,
             "course_id" => $this->course_id,
             "course_name" => $this->course->course_name,
             "remaining_fees" => $this->total_fees - $paidFees,

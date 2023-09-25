@@ -15,6 +15,11 @@ class Account extends Model
         "course_id",
     ];
 
+    protected $casts = [
+        "total_fees" => "float",
+        "paid_fees" => "float",
+    ];
+
     public function user(){
         return $this->belongsTo(User::class);
     }

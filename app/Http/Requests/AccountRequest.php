@@ -24,7 +24,7 @@ class AccountRequest extends FormRequest
         return [
             "user_id" => ["required"],
             "total_fees"=>["required"],
-            "paid_fees"=>["required"],
+            /* "paid_fees"=>["required"], */
             "course_id"=>["required"],
         ];
     }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Utils\ApiResponse;
 use App\Http\Requests\PaymentRequest;
 use App\Http\Resources\PaymentResource;
+use App\Models\Account;
 use App\Models\Payment;
 
 
@@ -21,6 +22,9 @@ class PaymentController extends Controller
     public function store(PaymentRequest $request)
     {
         $payment = Payment::create($request->validated());
+
+        Account::find($request->account_id)->increment('paid_fees', $request->amount);
+
         return ApiResponse::success(new PaymentResource($payment), "Payment created successfully");
     }
 

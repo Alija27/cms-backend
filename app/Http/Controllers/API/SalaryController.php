@@ -27,6 +27,8 @@ class SalaryController extends Controller
     {
         $data=$request->all();
         $data["payment_date"] =Carbon::now();
+        $data["tax"]=($data["salary"]*5)/100;
+        $data["net_pay"]=$data["salary"]-$data["tax"]+$data["incentive_amount"]-$data["deduction_amount"];
         $data=Salary::create($data);
         return ApiResponse::success(new SalaryResource($data), "Salary created successfully");
     }

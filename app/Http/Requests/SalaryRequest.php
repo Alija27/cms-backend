@@ -32,7 +32,7 @@ class SalaryRequest extends FormRequest
             "incentive_amount"=>["required"],
             "deduction_title"=>["required"],
             "deduction_amount"=>["required"],
-            "net_pay"=>["required"],
+            
             
         ];
     }

@@ -23,6 +23,8 @@ class BookTransactionController extends Controller
     public function store(BookTransactionRequest $request)
     {
         $transaction = $request->validated();
+        $transaction["issue_date"] = Carbon::now();
+        $transaction['issued'] = "issued";
         $transaction = BookTransaction::create($transaction);
         return ApiResponse::success(new BookTransactionResource($transaction), "BookTransaction created successfully");
     }

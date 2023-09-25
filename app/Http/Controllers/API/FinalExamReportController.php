@@ -10,6 +10,7 @@ use App\Models\FinalExamReport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FinalExamReportRequest;
 use App\Http\Resources\FinalExamReportResource;
+use App\Jobs\UpdateFeeForTopStudent;
 
 class FinalExamReportController extends Controller
 {
@@ -41,6 +42,11 @@ class FinalExamReportController extends Controller
         $data=$request->validated();
         $data["date"]=Carbon::now();
         $data=FinalExamReport::create($data);
+
+        if($request->position == 1 || $request->position == 2 || $request->position == 3){
+            dispatch(new UpdateFeeForTopStudent($data->student_id, $request->position));
+        }
+
         return ApiResponse::success(new FinalExamReportResource($data), "FinalExamReport created successfully");
     }
 
