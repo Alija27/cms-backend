@@ -89,7 +89,8 @@ Route::resource("salaries", \App\Http\Controllers\API\SalaryController::class);
 
 
 
-
+//count
+Route::get("count", [\App\Http\Controllers\API\SiteController::class, "count"]);
 //batches_students
 Route::get("batch-students", [\App\Http\Controllers\API\SiteController::class, "batches_students"]);
 //courses_students
@@ -98,3 +99,5 @@ Route::get("course-students", [\App\Http\Controllers\API\SiteController::class, 
 Route::get("course-students-last-five-years", [\App\Http\Controllers\API\SiteController::class, "courses_students_last_five_years"]);
 //roles_users
 Route::get("roles-users", [\App\Http\Controllers\API\SiteController::class, "roles_users"]);
+//book-courses
+Route::get("book-courses", [\App\Http\Controllers\API\SiteController::class, "courses_books"]);
